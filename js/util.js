@@ -170,7 +170,7 @@ function checkLevel(btnChecked) {
     }
     gCurrLevel1 = false
     console.log('Level', gLevel.SIZE);
-    elTable.classList.add('level3')
+    // elTable.classList.add('level3')
     clearInterval(gTimeInterval)
     init()
 }
