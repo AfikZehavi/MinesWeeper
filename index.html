@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>MinesWeeper</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+</head>
+
+<body onload="init()">
+    <div class="header"><h1>MinesWeeper</h1></div>
+    <div class="all-container">
+        
+
+        <div class="smiley-container"></div>
+        <div class="radiobuttons">
+            <ul>
+                <li>
+                    <input type="radio" name="level" id="level1" onclick="checkLevel(this)" checked>
+                    <label for="level1">Easy</label>
+                </li>
+                <li>
+                    <input type="radio" name="level" id="level2" onclick="checkLevel(this)">
+                    <label for="level2">Hard</label>
+                </li>
+                <li>
+                    <input type="radio" name="level" id="level3" onclick="checkLevel(this)">
+                    <label for="level3">Extreme</label>
+                </li>
+            </ul>
+        </div>
+    
+        <div class="board-container"></div>
+    
+
+
+    </div>
+    <div class="time-container">
+        <h2>00:00</h2>
+    </div>
+    <div class="lives-container" style="color: red">
+        <h2></h2>
+    </div>
+    <div class="restart-game" onclick="startGame()">
+        <h2></h2><button>Restart Game</button>
+    </div>
+    <script src="js/util.js"></script>
+    <script src="js/game.js"></script>
+
+    <footer>
+        <div class="footer-container">
+            <h3>Created by Afik Zehavi</h3>
+                <div class="socials">
+                    <a href="https://www.linkedin.com/in/afik-zehavi-997b91111/" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+                    <a href="https://www.facebook.com/afik.zehavi/" target="_blank"><i class="fa fa-facebook-square"></i></a>
+                </div>
+                
+        </div>
+    </footer>
+</body>
+
+</html>
