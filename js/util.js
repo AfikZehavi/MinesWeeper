@@ -1,19 +1,20 @@
 //Didn't use strict mode here to activate time with milsecs and secs
 var gMsec = 00;
 var gSec = 00;
+var gMin = 00;
 var gTimeInterval
 var gElRestartGame = document.querySelector('.restart-game')
 var gElSmiley = document.querySelector('.smiley-container')
 var gCheckLevels
 
 function printMat(mat, selector) {
-
+    //Update the DOM
     var strHTML = '<table border="0"><tbody>';
     for (var i = 0; i < mat.length; i++) {
         strHTML += '<tr>';
         for (var j = 0; j < mat[0].length; j++) {
             var className = 'cell cell-' + i + '-' + j;
-            strHTML += `<td class="${className}" onclick="cellClicked(this,${i},${j})" oncontextmenu="cellMarked(this,event)";></td>`
+            strHTML += `<td class="${className}" onclick="cellClicked(this,${i},${j})" oncontextmenu="markCell(event,${i},${j})";></td>`
         }
         strHTML += '</tr>'
     }
@@ -22,14 +23,6 @@ function printMat(mat, selector) {
     elContainer.innerHTML = strHTML;
 }
 
-function getTdId(value) {
-    var str = value.classList[1].split('-')
-    var id = {
-        i: str[1],
-        j: str[2],
-    }
-    return id
-}
 
 // location such as: {i: 2, j: 7}
 function renderCell(location, value) {
@@ -40,6 +33,7 @@ function renderCell(location, value) {
 
 function checkGameOver() {
 
+//
     if (gGame.markedCount + gGame.shownCount === gLevel.SIZE ** 2) {
         var gElH2RestartGame = document.querySelector('.restart-game h2');
         gElH2RestartGame.innerText = 'You Won The Game!'
@@ -170,29 +164,27 @@ function checkLevel(btnChecked) {
     }
     gCurrLevel1 = false
     console.log('Level', gLevel.SIZE);
-    // elTable.classList.add('level3')
+    elTable.classList.add('level3')
     clearInterval(gTimeInterval)
     init()
 }
 
 function updateTimer() {
-
+//6 digits countup timer
     gMsec += 1;
     if (gMsec == 60) {
         gSec += 1;
         gMsec = 00;
         if (gSec == 60) {
             gSec = 00;
-            min += 1;
-            if (gSec % 2 == 0) {
-                alert("Pair");
-            }
+            gMin += 1;
+
         }
     }
     var strMsec = gMsec < 10 ? '0' + gMsec : gMsec
     var strSec = gSec < 10 ? '0' + gSec : gSec
-
-    document.querySelector('.time-container h2').innerHTML = strSec + ":" + strMsec;
+    var strMin = gMin < 10 ? '0' + gMin : gMin
+    document.querySelector('.time-container h2').innerHTML =strMin + ':' +  strSec + ":" + strMsec;
 }
 
 function startGame() {
@@ -201,13 +193,15 @@ function startGame() {
 
         init()
     }
-    gGame.isOn = true
+
+    //restore the game timer and set gGame.isOn to true
     gMsec = 00;
     gSec = 00;
-
+    gMin = 00;
+    gGame.isOn = true
     gTimeInterval = setInterval(() => {
         updateTimer()
-    }, 100);
+    }, 10);
 
 }
 

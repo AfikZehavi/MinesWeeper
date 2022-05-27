@@ -15,7 +15,7 @@ body {
     width: 100%;
     color: #fcfcfc;
     background-color: #414141;
-    height: 6rem;
+    height: 82px;
     font-weight: 3px;
     padding: 10px 20px;
     box-sizing: border-box;
@@ -112,13 +112,14 @@ input[type="radio" i] {
 }
 
 .board-container.level3 {
-    margin-top: 6rem;
+    /* margin-top: 6rem; */
     margin-left: 0.5rem;
+    height: 320px;
 }
 
 .board-container.level3 td {
-
-    height: 37px;
+    font-size: 20px;
+    height: 30px;
     width: 30px;
 }
 
@@ -140,7 +141,7 @@ input[type="radio" i] {
 }
 
 .time-container h2 {
-    margin-left: 2rem;
+    margin-left: 12px;
     word-spacing: 10px;
     margin-bottom: 4rem;
     padding-top: 3rem;
@@ -194,6 +195,31 @@ input[type="radio" i] {
     
 }
 
+.safe-click {
+    position: absolute;
+    margin-right: 35rem;
+    
+    
+}
+
+.safe-click button {
+    border-radius: 30px;
+    width: 7rem;
+    height: 3rem;
+    box-shadow: 1px 1px 8px #000000cf;
+    background: hsl(0, 0%, 73%);
+    border: 0px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.safe-click button:active {
+    vertical-align: top;
+
+    background: hsl(0, 0%, 53%);
+
+}
+
 .lives-container h2 {
     margin-left: 1.5rem;
     /* width: 1px; */
@@ -222,7 +248,7 @@ footer {
     box-sizing: border-box;
     width: 100%;
     text-align: center;
-    height: 6rem;
+    height: 99px;
     box-shadow: 1px 1px 8px #000000cf;
 
 
