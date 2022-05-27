@@ -202,7 +202,7 @@ function findSafeClick(elBtn) {
             for (var j = 0; j < gBoard[0].length; j++) {
                 if (!gBoard[i][j].isMine && !gBoard[i][j].isShown) {
                     var elCell = document.querySelector(`.cell-${i}-${j}`);
-                    elCell.style.backgroundColor = 'red'
+                    elCell.style.backgroundColor = 'aliceblue'
                     gSafeCellTimeOut = setTimeout(() => {
                         elCell.style.backgroundColor = 'hsl(0, 0%, 73%)'
                         
