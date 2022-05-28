@@ -24,7 +24,6 @@ function printMat(mat, selector) {
 }
 
 
-// location such as: {i: 2, j: 7}
 function renderCell(location, value) {
     // Select the elCell and set the value
     var elCell = document.querySelector(`.cell-${location.i}-${location.j}`);
@@ -32,8 +31,7 @@ function renderCell(location, value) {
 }
 
 function checkGameOver() {
-
-//
+//Sum the cells that are marked currectly (If they marked a mine) and the cells that are shown, if the equal to the size of the board then it's a WIN.
     if (gGame.markedCount + gGame.shownCount === gLevel.SIZE ** 2) {
         var gElH2RestartGame = document.querySelector('.restart-game h2');
         gElH2RestartGame.innerText = 'You Won The Game!'
@@ -79,7 +77,6 @@ function clearEmptyCellsAround(board, posI, posJ) {
 
         for (var j = posJ - 1; j <= posJ + 1; j++) {
 
-            //Check to see if it doesn't go beyond it's bounderis within the board 
 
 
             if (j < 0 || j > board[0].length - 1) continue
@@ -93,6 +90,7 @@ function clearEmptyCellsAround(board, posI, posJ) {
             }
 
             if (!cell.minesAround && !cell.isShown) {
+                //Find all the cells with no mines around and mark them
                 cell.isShown = true
                 gGame.shownCount++
                 var elCell = document.querySelector(`.cell-${i}-${j}`);
@@ -102,8 +100,7 @@ function clearEmptyCellsAround(board, posI, posJ) {
 
                 clearEmptyCellsAround(board, i, j)
             } else if (cell.minesAround && !cell.isShown) {
-
-                //print the negs who have a mines around and are not mines
+                //When there are no empty cells left mark all the numbered cells around the empty cells
                 cell.isShown = true;
                 gGame.shownCount++
                 renderCell(cellLocation, cell.minesAround)
@@ -113,17 +110,9 @@ function clearEmptyCellsAround(board, posI, posJ) {
     }
 }
 
-
-
-function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
-}
-
 function checkLevel(btnChecked) {
+    //This function gets the attributes of the radio buttons above the board and set the level by it's user decision.
     var elTable = document.querySelector('.board-container')
-    var elLives = document.querySelector('.lives-container')
     console.log(btnChecked);
     gCheckLevels = btnChecked.getAttribute('id')
     if (gCheckLevels === 'level1') {
@@ -134,6 +123,7 @@ function checkLevel(btnChecked) {
             MINES: 2,
 
         }
+        //Set the gCurrLevel1 to true to decrease the amount of lives in that round.
         gCurrLevel1 = true
         clearInterval(gTimeInterval)
         updateLives()
@@ -164,13 +154,14 @@ function checkLevel(btnChecked) {
     }
     gCurrLevel1 = false
     console.log('Level', gLevel.SIZE);
+    //Add level3 calss for the different style of the larger board in css file.
     elTable.classList.add('level3')
     clearInterval(gTimeInterval)
     init()
 }
 
 function updateTimer() {
-//6 digits countup timer
+    //6 digits countup timer
     gMsec += 1;
     if (gMsec == 60) {
         gSec += 1;
@@ -184,10 +175,11 @@ function updateTimer() {
     var strMsec = gMsec < 10 ? '0' + gMsec : gMsec
     var strSec = gSec < 10 ? '0' + gSec : gSec
     var strMin = gMin < 10 ? '0' + gMin : gMin
-    document.querySelector('.time-container h2').innerHTML =strMin + ':' +  strSec + ":" + strMsec;
+    document.querySelector('.time-container h2').innerHTML = strMin + ':' + strSec + ":" + strMsec;
 }
 
 function startGame() {
+    //Pop up the restart game div.
     gElRestartGame.style.display = 'none'
     if (gSec !== null) {
 
@@ -206,6 +198,8 @@ function startGame() {
 }
 
 function updateLives() {
+    //Update the game lives meter. 
+    //This function will be called everytime the user steps on a mine.
     var livesContainer = document.querySelector('.lives-container h2')
     var strHTML = ``
     for (var i = 0; i < gGame.lives; i++) {
@@ -216,6 +210,8 @@ function updateLives() {
 }
 
 
-// function checkLevel(btnChecked) {
-//     var elTable = document.querySelector('.board-container')
-//     var level = btnChecked.getAttribute('id')
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+}

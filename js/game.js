@@ -20,6 +20,7 @@ var gLevel = {
 
 
 function init() {
+    //The init() is also used in the start game to restore all the game to it's default attributes. 
     gGame = {
         isOn: false,
         shownCount: 0,
@@ -39,6 +40,7 @@ function init() {
     printMat(gBoard, '.board-container')
 
 }
+
 function createBoard(boardSize) {
     var board = []
     for (var i = 0; i < boardSize; i++) {
@@ -62,7 +64,7 @@ function createBoard(boardSize) {
 
 
 function countAllMinesAround(board) {
-    //Define the numbers inside a cell by counting th mines around
+    //Define the number inside a cell by counting th mines around, this function is dependent on the countMinesAround() function in the util.js file.
     for (var i = 0; i < board.length; i++) {
         for (var j = 0; j < board[0].length; j++) {
             board[i][j].minesAround = countMinesAround(board, i, j)
@@ -144,6 +146,7 @@ function markCell(ev, i, j) {
             cell.isMarked = true;
             //Update the DOM element
             renderCell(cellLocation, FLAG)
+            //If the player did find a mine and marked it, it will count it and later will checked in the function checkgameOver()
             if (cell.isMine) gGame.markedCount++
 
         }
@@ -198,6 +201,7 @@ function findSafeClick(elBtn) {
         startGame()
     }
     if (gGame.safeClicks > 0) {
+    //Run through the board and find a cell that is safe to press and mark it for a few millseconds so the user can choose it.
         for (var i = 0; i < gBoard.length; i++) {
             for (var j = 0; j < gBoard[0].length; j++) {
                 if (!gBoard[i][j].isMine && !gBoard[i][j].isShown) {
